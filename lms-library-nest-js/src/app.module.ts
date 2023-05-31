@@ -5,9 +5,11 @@ import { UserModule } from './user/user.module';
 import { CategoryModule } from './category/category.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/entity/user.entity';
-import { Category } from './category/entity';
+import { Categorys } from './category/entity';
 import { BrandModule } from './brand/brand.module';
 import { Brands } from './brand/entity';
+import { ProductModule } from './product/product.module';
+import { Products } from './product/entity';
 
 @Module({
   imports: [
@@ -15,6 +17,7 @@ import { Brands } from './brand/entity';
     UserModule,
     CategoryModule,
     BrandModule,
+    ProductModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -23,7 +26,7 @@ import { Brands } from './brand/entity';
       username: 'hoang',
       password: '123',
       database: 'LMSECO',
-      entities: [User, Category, Brands],
+      entities: [User, Categorys, Brands, Products],
       synchronize: true,
       autoLoadEntities: true,
     }),

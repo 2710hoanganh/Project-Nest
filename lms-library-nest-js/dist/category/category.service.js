@@ -102,7 +102,7 @@ let CategoryService = class CategoryService {
 };
 CategoryService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(entity_1.Category)),
+    __param(0, (0, typeorm_1.InjectRepository)(entity_1.Categorys)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], CategoryService);
 exports.CategoryService = CategoryService;

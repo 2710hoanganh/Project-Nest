@@ -13,7 +13,7 @@ import { Roles } from 'src/auth/role-check';
 import { Role } from 'src/user/entity';
 import { AuthGuard } from '@nestjs/passport';
 import { CategoryDTO } from './dto';
-import { Category } from './entity';
+import { Categorys } from './entity';
 
 @Controller('category')
 export class CategoryController {
@@ -22,7 +22,7 @@ export class CategoryController {
   @Roles(Role.Admin)
   @UseGuards(AuthGuard('jwt'))
   @Post('create')
-  createCategory(@Body() dto: CategoryDTO): Promise<Category> {
+  createCategory(@Body() dto: CategoryDTO): Promise<Categorys> {
     return this.service.create(dto);
   }
   @Roles(Role.Admin)

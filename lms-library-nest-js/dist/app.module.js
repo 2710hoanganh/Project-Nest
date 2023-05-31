@@ -17,6 +17,8 @@ const user_entity_1 = require("./user/entity/user.entity");
 const entity_1 = require("./category/entity");
 const brand_module_1 = require("./brand/brand.module");
 const entity_2 = require("./brand/entity");
+const product_module_1 = require("./product/product.module");
+const entity_3 = require("./product/entity");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -26,6 +28,7 @@ AppModule = __decorate([
             user_module_1.UserModule,
             category_module_1.CategoryModule,
             brand_module_1.BrandModule,
+            product_module_1.ProductModule,
             config_1.ConfigModule.forRoot({ isGlobal: true }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
@@ -34,7 +37,7 @@ AppModule = __decorate([
                 username: 'hoang',
                 password: '123',
                 database: 'LMSECO',
-                entities: [user_entity_1.User, entity_1.Category, entity_2.Brands],
+                entities: [user_entity_1.User, entity_1.Categorys, entity_2.Brands, entity_3.Products],
                 synchronize: true,
                 autoLoadEntities: true,
             }),

@@ -1,17 +1,16 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Category } from './entity';
+import { Categorys } from './entity';
 import { CategoryDTO } from './dto';
-import { promises } from 'dns';
 
 @Injectable()
 export class CategoryService {
   constructor(
-    @InjectRepository(Category) private repository: Repository<Category>,
+    @InjectRepository(Categorys) private repository: Repository<Categorys>,
   ) {}
 
-  async create(dto: CategoryDTO): Promise<Category> {
+  async create(dto: CategoryDTO): Promise<Categorys> {
     try {
       const category = await this.repository.create({
         name: dto.name,
@@ -24,7 +23,7 @@ export class CategoryService {
     }
   }
 
-  async get(id: number): Promise<Category> {
+  async get(id: number): Promise<Categorys> {
     try {
       const category = await this.repository.findOneBy({
         id: id,
@@ -37,7 +36,7 @@ export class CategoryService {
       throw new HttpException(error.detail, HttpStatus.BAD_REQUEST);
     }
   }
-  async getALl(): Promise<Category[]> {
+  async getALl(): Promise<Categorys[]> {
     try {
       const categorys = await this.repository.find({
         select: {
