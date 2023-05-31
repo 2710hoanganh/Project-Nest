@@ -11,6 +11,11 @@ export class AuthController {
     return this.service.signup(dto); //call service from auth.service.ts
   }
 
+  @Post('sign-up/admin')
+  signupAD(@Body() dto: AuthRegisterDTO) {
+    return this.service.signupAdmin(dto); //call service from auth.service.ts
+  }
+
   @Post('login')
   login(@Body() dto: LoginDTO): Promise<any> {
     return this.service.login(dto);

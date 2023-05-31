@@ -17,15 +17,58 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const entity_1 = require("./entity");
+const entity_2 = require("../category/entity");
+const entity_3 = require("../brand/entity");
 let ProductService = class ProductService {
-    constructor(repository) {
+    constructor(repository, categoryRepo, brandRepo) {
         this.repository = repository;
+        this.categoryRepo = categoryRepo;
+        this.brandRepo = brandRepo;
+    }
+    async create(dto) {
+        try {
+            this.findCategory(dto.categoryName);
+            this.findBrand(dto.brandName);
+            const product = await this.repository.create({
+                name: dto.name,
+                description: dto.desc,
+                price: dto.price,
+                quantity: dto.quantity,
+            });
+            this.repository.save(product);
+            return product;
+        }
+        catch (error) {
+            throw new common_1.HttpException(error.detail, common_1.HttpStatus.BAD_REQUEST);
+        }
+    }
+    async findCategory(name) {
+        const category = await this.categoryRepo.findOneBy({
+            name: name,
+        });
+        if (!category) {
+            throw new common_1.HttpException('Category Not Found!', common_1.HttpStatus.NOT_FOUND);
+        }
+        return category;
+    }
+    async findBrand(name) {
+        const brand = await this.brandRepo.findOneBy({
+            name: name,
+        });
+        if (!brand) {
+            throw new common_1.HttpException('Category Not Found!', common_1.HttpStatus.NOT_FOUND);
+        }
+        return brand;
     }
 };
 ProductService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(entity_1.Products)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectRepository)(entity_2.Categorys)),
+    __param(2, (0, typeorm_1.InjectRepository)(entity_3.Brands)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository,
+        typeorm_2.Repository])
 ], ProductService);
 exports.ProductService = ProductService;
 //# sourceMappingURL=product.service.js.map

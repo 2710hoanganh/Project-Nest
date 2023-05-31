@@ -14,7 +14,10 @@ export class Products {
   price: number;
   @Column()
   quantity: number;
-  @Column({ type: 'timestamptz' })
+  @Column('timestamp with time zone', {
+    nullable: false,
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   create_At: Date;
   @ManyToOne(() => Brands, (brand: Brands) => brand.product)
   public brand: Brands;

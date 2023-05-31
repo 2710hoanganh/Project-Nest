@@ -9,7 +9,10 @@ export class Brands {
   name: string;
   @Column()
   description: string;
-  @Column({ type: 'timestamptz' })
+  @Column('timestamp with time zone', {
+    nullable: false,
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   create_At: Date;
   @OneToMany(() => Products, (product: Products) => product.brand)
   public product: Products[];

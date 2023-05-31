@@ -12,7 +12,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { AuthRegisterDTO, LoginDTO } from './dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/user/entity/user.entity';
+import { Role, User } from 'src/user/entity/user.entity';
 import { Repository } from 'typeorm';
 import { time } from 'console';
 @Injectable({})
@@ -31,6 +31,23 @@ export class AuthService {
       const newUser = await this.repository.create({
         email: dto.email,
         password: hash,
+      });
+      await this.repository.save(newUser);
+      return newUser;
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async signupAdmin(dto: AuthRegisterDTO): Promise<User> {
+    try {
+      //hash the password
+      const hash = await bcrypt.hash(dto.password, 10);
+      //create new user
+      const newUser = await this.repository.create({
+        email: dto.email,
+        password: hash,
+        role: Role.Admin,
       });
       await this.repository.save(newUser);
       return newUser;

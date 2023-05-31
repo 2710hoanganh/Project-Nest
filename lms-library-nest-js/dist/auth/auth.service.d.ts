@@ -9,6 +9,7 @@ export declare class AuthService {
     private config;
     constructor(repository: Repository<User>, jwt: JwtService, config: ConfigService);
     signup(dto: AuthRegisterDTO): Promise<User>;
+    signupAdmin(dto: AuthRegisterDTO): Promise<User>;
     login(dto: LoginDTO): Promise<any>;
     createToken(id: number, email: string, role: string): Promise<string>;
 }

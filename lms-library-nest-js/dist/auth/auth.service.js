@@ -40,6 +40,21 @@ let AuthService = class AuthService {
             throw new common_1.HttpException(error, common_1.HttpStatus.BAD_REQUEST);
         }
     }
+    async signupAdmin(dto) {
+        try {
+            const hash = await bcrypt.hash(dto.password, 10);
+            const newUser = await this.repository.create({
+                email: dto.email,
+                password: hash,
+                role: user_entity_1.Role.Admin,
+            });
+            await this.repository.save(newUser);
+            return newUser;
+        }
+        catch (error) {
+            throw new common_1.HttpException(error, common_1.HttpStatus.BAD_REQUEST);
+        }
+    }
     async login(dto) {
         try {
             const user = await this.repository.findOneBy({

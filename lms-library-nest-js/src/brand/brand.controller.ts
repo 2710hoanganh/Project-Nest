@@ -29,7 +29,7 @@ export class BrandController {
   @Get(':id')
   @UseGuards(AuthGuard('jwt'))
   @Roles(Role.Admin || Role.Staff)
-  get(@Param() id: number): Promise<Brands> {
+  get(@Param('id') id: number): Promise<Brands> {
     return this.service.get(id);
   }
   @Get('list')
@@ -42,14 +42,14 @@ export class BrandController {
   @Put('edit/:id')
   @UseGuards(AuthGuard('jwt'))
   @Roles(Role.Admin || Role.Staff)
-  update(@Param() id: number, @Body() dto: BrandDTO): Promise<any> {
+  update(@Param('id') id: number, @Body() dto: BrandDTO): Promise<any> {
     return this.service.update(dto, id);
   }
 
   @Delete('delete/:id')
   @UseGuards(AuthGuard('jwt'))
   @Roles(Role.Admin || Role.Staff)
-  delete(@Param() id: number): Promise<any> {
+  delete(@Param('id') id: number): Promise<any> {
     return this.service.delete(id);
   }
 }

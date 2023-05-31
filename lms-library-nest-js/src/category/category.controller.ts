@@ -19,34 +19,34 @@ import { Categorys } from './entity';
 export class CategoryController {
   constructor(private service: CategoryService) {}
 
-  @Roles(Role.Admin)
+  @Roles(Role.Admin || Role.Staff)
   @UseGuards(AuthGuard('jwt'))
   @Post('create')
   createCategory(@Body() dto: CategoryDTO): Promise<Categorys> {
     return this.service.create(dto);
   }
-  @Roles(Role.Admin)
+  @Roles(Role.Admin || Role.Staff)
   @UseGuards(AuthGuard('jwt'))
   @Get(':id')
-  getCategory(@Param() id: number) {
+  getCategory(@Param('id') id: number) {
     return this.service.get(id);
   }
-  @Roles(Role.Admin)
+  @Roles(Role.Admin || Role.Staff)
   @UseGuards(AuthGuard('jwt'))
   @Get('list')
   getAll() {
     return this.service.getALl();
   }
-  @Roles(Role.Admin)
+  @Roles(Role.Admin || Role.Staff)
   @UseGuards(AuthGuard('jwt'))
   @Put('edit/:id')
-  editCategory(@Param() id: number, @Body() dto: CategoryDTO) {
+  editCategory(@Param('id') id: number, @Body() dto: CategoryDTO) {
     return this.service.edit(id, dto);
   }
-  @Roles(Role.Admin)
+  @Roles(Role.Admin || Role.Staff)
   @UseGuards(AuthGuard('jwt'))
   @Delete('delete/:id')
-  deteleCategory(@Param() id: number) {
+  deteleCategory(@Param('id') id: number) {
     return this.service.delete(id);
   }
 }

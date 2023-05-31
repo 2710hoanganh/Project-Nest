@@ -52,7 +52,7 @@ __decorate([
     (0, common_1.Get)(':id'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
     (0, role_check_1.Roles)(entity_1.Role.Admin || entity_1.Role.Staff),
-    __param(0, (0, common_1.Param)()),
+    __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
@@ -69,7 +69,7 @@ __decorate([
     (0, common_1.Put)('edit/:id'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
     (0, role_check_1.Roles)(entity_1.Role.Admin || entity_1.Role.Staff),
-    __param(0, (0, common_1.Param)()),
+    __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, dto_1.BrandDTO]),
@@ -79,7 +79,7 @@ __decorate([
     (0, common_1.Delete)('delete/:id'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
     (0, role_check_1.Roles)(entity_1.Role.Admin || entity_1.Role.Staff),
-    __param(0, (0, common_1.Param)()),
+    __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)

@@ -40,7 +40,7 @@ let CategoryController = class CategoryController {
     }
 };
 __decorate([
-    (0, role_check_1.Roles)(entity_1.Role.Admin),
+    (0, role_check_1.Roles)(entity_1.Role.Admin || entity_1.Role.Staff),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
     (0, common_1.Post)('create'),
     __param(0, (0, common_1.Body)()),
@@ -49,16 +49,16 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "createCategory", null);
 __decorate([
-    (0, role_check_1.Roles)(entity_1.Role.Admin),
+    (0, role_check_1.Roles)(entity_1.Role.Admin || entity_1.Role.Staff),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
     (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)()),
+    __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], CategoryController.prototype, "getCategory", null);
 __decorate([
-    (0, role_check_1.Roles)(entity_1.Role.Admin),
+    (0, role_check_1.Roles)(entity_1.Role.Admin || entity_1.Role.Staff),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
     (0, common_1.Get)('list'),
     __metadata("design:type", Function),
@@ -66,20 +66,20 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CategoryController.prototype, "getAll", null);
 __decorate([
-    (0, role_check_1.Roles)(entity_1.Role.Admin),
+    (0, role_check_1.Roles)(entity_1.Role.Admin || entity_1.Role.Staff),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
     (0, common_1.Put)('edit/:id'),
-    __param(0, (0, common_1.Param)()),
+    __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, dto_1.CategoryDTO]),
     __metadata("design:returntype", void 0)
 ], CategoryController.prototype, "editCategory", null);
 __decorate([
-    (0, role_check_1.Roles)(entity_1.Role.Admin),
+    (0, role_check_1.Roles)(entity_1.Role.Admin || entity_1.Role.Staff),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
     (0, common_1.Delete)('delete/:id'),
-    __param(0, (0, common_1.Param)()),
+    __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)

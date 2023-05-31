@@ -46,7 +46,7 @@ export class UserController {
   @Roles(Role.Admin)
   @UseGuards(AuthGuard('jwt'))
   @Get('staff/:id')
-  getUser(@Param() id: number): Promise<User> {
+  getUser(@Param('id') id: number): Promise<User> {
     return this.service.getUser(id);
   }
   @Roles(Role.Admin)
@@ -58,7 +58,7 @@ export class UserController {
   @Roles(Role.Admin)
   @UseGuards(AuthGuard('jwt'))
   @Delete('delete/:id')
-  deleteUser(id: number): Promise<any> {
+  deleteUser(@Param('id') id: number): Promise<any> {
     return this.service.deleteUser(id);
   }
 }

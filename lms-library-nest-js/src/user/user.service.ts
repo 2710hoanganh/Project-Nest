@@ -66,6 +66,9 @@ export class UserService {
   async userList(): Promise<User[]> {
     try {
       const user = await this.repository.find({
+        where: {
+          role: Role.Staff,
+        },
         select: {
           email: true,
           password: false,

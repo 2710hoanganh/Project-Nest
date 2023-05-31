@@ -61,6 +61,9 @@ let UserService = class UserService {
     async userList() {
         try {
             const user = await this.repository.find({
+                where: {
+                    role: entity_1.Role.Staff,
+                },
                 select: {
                     email: true,
                     password: false,
