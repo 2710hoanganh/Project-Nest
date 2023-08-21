@@ -8,7 +8,10 @@ export declare class ProductService {
     private categoryRepo;
     private brandRepo;
     constructor(repository: Repository<Products>, categoryRepo: Repository<Categorys>, brandRepo: Repository<Brands>);
-    create(dto: ProductDTO): Promise<Products>;
+    createProduct(dto: ProductDTO): Promise<Products>;
+    getProduct(id: number): Promise<Products>;
+    getAllProduct(): Promise<Products[]>;
+    deleteProduct(id: number): Promise<string>;
     findCategory(name: string): Promise<Categorys>;
     findBrand(name: string): Promise<Brands>;
 }

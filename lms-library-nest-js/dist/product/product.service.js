@@ -25,7 +25,7 @@ let ProductService = class ProductService {
         this.categoryRepo = categoryRepo;
         this.brandRepo = brandRepo;
     }
-    async create(dto) {
+    async createProduct(dto) {
         try {
             this.findCategory(dto.categoryName);
             this.findBrand(dto.brandName);
@@ -37,6 +37,41 @@ let ProductService = class ProductService {
             });
             this.repository.save(product);
             return product;
+        }
+        catch (error) {
+            throw new common_1.HttpException(error.detail, common_1.HttpStatus.BAD_REQUEST);
+        }
+    }
+    async getProduct(id) {
+        try {
+            const product = await this.repository.findOneBy({ id: id });
+            return product;
+        }
+        catch (error) {
+            throw new common_1.HttpException(error.detail, common_1.HttpStatus.BAD_REQUEST);
+        }
+    }
+    async getAllProduct() {
+        try {
+            const products = await this.repository.find({
+                select: {
+                    create_At: false
+                }
+            });
+            return products;
+        }
+        catch (error) {
+            throw new common_1.HttpException(error.detail, common_1.HttpStatus.BAD_REQUEST);
+        }
+    }
+    async deleteProduct(id) {
+        try {
+            const product = await this.repository.findOneBy({ id: id });
+            if (!product) {
+                throw new common_1.HttpException('Not Found', common_1.HttpStatus.BAD_REQUEST);
+            }
+            this.repository.delete(product);
+            return 'Product Deleted !';
         }
         catch (error) {
             throw new common_1.HttpException(error.detail, common_1.HttpStatus.BAD_REQUEST);

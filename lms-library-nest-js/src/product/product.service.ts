@@ -5,6 +5,8 @@ import { Products } from './entity';
 import { ProductDTO } from './dto';
 import { Categorys } from 'src/category/entity';
 import { Brands } from 'src/brand/entity';
+import { error } from 'console';
+import { promises } from 'dns';
 
 @Injectable()
 export class ProductService {
@@ -14,9 +16,8 @@ export class ProductService {
     @InjectRepository(Brands) private brandRepo: Repository<Brands>,
   ) {}
 
-  async create(dto: ProductDTO): Promise<Products> {
+  async createProduct(dto: ProductDTO): Promise<Products> {
     try {
-      //use from " some shit "
       this.findCategory(dto.categoryName);
       this.findBrand(dto.brandName);
 
@@ -33,8 +34,39 @@ export class ProductService {
       throw new HttpException(error.detail, HttpStatus.BAD_REQUEST);
     }
   }
-
-  //some shit:))
+  async getProduct(id:number) :Promise<Products>{
+    try {
+      const product = await this.repository.findOneBy({id:id});
+      return product ;
+    } catch (error) {
+      throw new HttpException(error.detail, HttpStatus.BAD_REQUEST);
+    }
+  }
+  async getAllProduct():Promise<Products[]>{
+    try {
+      const products = await this.repository.find({
+        select :{
+          create_At : false
+        }
+      });
+      return products ;
+    } catch (error) {
+      throw new HttpException(error.detail, HttpStatus.BAD_REQUEST);
+    }
+  }
+  async deleteProduct(id:number):Promise<string>{
+    try {
+      const product = await this.repository.findOneBy({id:id});
+      if(!product){
+        throw new HttpException('Not Found', HttpStatus.BAD_REQUEST);
+      }
+      this.repository.delete(product);
+      return 'Product Deleted !';
+    } catch (error) {
+      throw new HttpException(error.detail, HttpStatus.BAD_REQUEST);
+    }
+  }
+  
 
   async findCategory(name: string) {
     const category = await this.categoryRepo.findOneBy({

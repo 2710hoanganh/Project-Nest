@@ -71,7 +71,7 @@ export class AuthService {
       if (!passwordValidate) {
         throw new UnauthorizedException();
       }
-      return this.createToken(user.id, user.email, user.role); //return token:))
+      return this.createToken(user.id, user.email, user.role) ;
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
@@ -86,7 +86,6 @@ export class AuthService {
       secret: secret_key,
       expiresIn: timeExpires,
     });
-
     return token;
   }
 }

@@ -19,7 +19,7 @@ import { BrandDTO } from './dto';
 export class BrandController {
   constructor(private service: BrandService) {}
 
-  @Post('craete')
+  @Post('create')
   @UseGuards(AuthGuard('jwt'))
   @Roles(Role.Admin || Role.Staff)
   create(@Body() dto: BrandDTO): Promise<Brands> {

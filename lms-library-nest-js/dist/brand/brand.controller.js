@@ -40,7 +40,7 @@ let BrandController = class BrandController {
     }
 };
 __decorate([
-    (0, common_1.Post)('craete'),
+    (0, common_1.Post)('create'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
     (0, role_check_1.Roles)(entity_1.Role.Admin || entity_1.Role.Staff),
     __param(0, (0, common_1.Body)()),

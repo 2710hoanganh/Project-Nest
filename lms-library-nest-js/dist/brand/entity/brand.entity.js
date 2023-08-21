@@ -27,7 +27,10 @@ __decorate([
     __metadata("design:type", String)
 ], Brands.prototype, "description", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'timestamptz' }),
+    (0, typeorm_1.Column)('timestamp with time zone', {
+        nullable: false,
+        default: () => 'CURRENT_TIMESTAMP',
+    }),
     __metadata("design:type", Date)
 ], Brands.prototype, "create_At", void 0);
 __decorate([
